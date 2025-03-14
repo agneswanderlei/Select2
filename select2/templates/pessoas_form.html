@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Pessoa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Criar Pessoa</h1>
+        <form method="post" action="{% url 'pessoas_add' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="#" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- <script>
+        $(document).ready(function() {
+            $('#id_estados').select2();
+        });
+    </script> -->
+    <script>
+        $(document).ready(function() {
+            $('#id_estados').select2({
+                ajax: {
+                    url: "{% url 'pessoas_add' %}", // Certifique-se que esta URL está correta
+                    dataType: 'json',
+                    delay: 250, // Aguarda 250ms antes de enviar a requisição
+                    data: function(params) {
+                        return {
+                            q: params.term // Termo que o usuário digitou
+                        };
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: $.map(data, function(item) {
+                                return {id: item.id, text: item.uf + ' - ' + item.name};
+                            }) // O formato precisa corresponder ao JSON da sua view
+                        };
+                    },
+                    cache: true
+                },
+                placeholder: 'Digite para pesquisar estados',
+                minimumInputLength: 1 // Só envia requisições com pelo menos 1 caractere
+            });
+        });
+    </script>
+    
+
+</body>
+</html>
