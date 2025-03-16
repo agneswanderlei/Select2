@@ -1,6 +1,5 @@
 from django import forms
 from .models import Pessoas
-from dal import autocomplete
 
 # class PessoasForm(forms.ModelForm):
 #     class Meta:

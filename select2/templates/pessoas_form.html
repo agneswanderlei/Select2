@@ -14,7 +14,7 @@
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Criar Pessoa</h1>
-        <form method="post" action="{% url 'pessoas_add' %}">
+        <form method="post" action="{% url 'pessoas_create' %}">
             {% csrf_token %}
             <div class="mb-3">
                 {{ form.as_p }}
@@ -34,7 +34,7 @@
         $(document).ready(function() {
             $('#id_estados').select2({
                 ajax: {
-                    url: "{% url 'pessoas_add' %}", // Certifique-se que esta URL está correta
+                    url: "{% url 'pessoas_create' %}", // Certifique-se que esta URL está correta
                     dataType: 'json',
                     delay: 250, // Aguarda 250ms antes de enviar a requisição
                     data: function(params) {
